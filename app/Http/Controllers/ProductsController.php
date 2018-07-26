@@ -7,34 +7,55 @@ use App\Product;
 
 class ProductsController extends Controller
 {
-  public function index()
- {
-     return Product::all();
- }
+   public function index()
+   {
+     $products = Product::all();
+     return response()->json($products);
+   }
 
- public function show(Product $product)
- {
-     return $product;
- }
+   public function show($id)
+   {
+       $product = Product::find($id);
+       if(!$product){
+         return response()->json([
+             'message'   => 'Record not found',
+         ], 404);
+       }
+       return response()->json($product, 200);
+   }
 
- public function store(Request $request)
- {
-     $product = Product::create($request->all());
+   public function store(Request $request)
+   {
+       $product = new Product();
+       $product->fill($request->all());
+       $product->save();
 
-     return response()->json($product, 201);
- }
+       return response()->json($product, 201);
+   }
 
- public function update(Request $request, Product $product)
- {
-     $product->update($request->all());
+   public function update(Request $request, $id)
+   {
+     $product = Product::findOrFail($id);
 
-     return response()->json($product, 200);
- }
+      if(!$product) {
+          return response()->json([
+              'message'   => 'Record not found',
+          ], 404);
+      }
 
- public function delete(Product $product)
- {
-     $product->delete();
+      $product->save($request->all());
 
-     return response()->json(null, 204);
- }
+      return response()->json($product);
+   }
+
+   public function destroy($id)
+   {
+     $product = Product::find($id);
+        if(!$product) {
+            return response()->json([
+                'message'   => 'Record not found',
+            ], 404);
+        }
+        $product->delete();
+   }
 }

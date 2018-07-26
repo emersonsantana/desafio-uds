@@ -7,7 +7,8 @@ Route::group(array('prefix' => 'api'), function()
       return response()->json(['message' => 'API', 'status' => 'Connected']);;
   });
 
-  Route::resource('products', 'ProductsController');
+      Route::resource('products', 'ProductsController');
+      Route::resource('consumers', 'ConsumersController');
   });
 
 Route::get('/', function () {
