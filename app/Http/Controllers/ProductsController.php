@@ -33,17 +33,16 @@ class ProductsController extends Controller
        return response()->json($product, 201);
    }
 
-   public function update(Request $request, $id)
+   public function update(Request $request, $code)
    {
-     $product = Product::findOrFail($id);
+     $product = Product::where('code',$code);
 
       if(!$product) {
           return response()->json([
               'message'   => 'Record not found',
           ], 404);
       }
-
-      $product->save($request->all());
+      $product->update($request->all());
 
       return response()->json($product);
    }

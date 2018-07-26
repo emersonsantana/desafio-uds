@@ -9,6 +9,7 @@ Route::group(array('prefix' => 'api'), function()
 
       Route::resource('products', 'ProductsController');
       Route::resource('consumers', 'ConsumersController');
+      Route::resource('orders', 'OrdersController');
   });
 
 Route::get('/', function () {

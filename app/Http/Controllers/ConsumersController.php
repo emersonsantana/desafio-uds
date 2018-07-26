@@ -33,24 +33,23 @@ class ConsumersController extends Controller
       return response()->json($consumer, 201);
   }
 
-  public function update(Request $request, $id)
+  public function update(Request $request, $cpf)
   {
-    $consumer = Consumer::findOrFail($id);
+    $consumer = Consumer::where('cpf', $cpf);
 
      if(!$consumer) {
          return response()->json([
              'message'   => 'Record not found',
          ], 404);
      }
-
-     $consumer->save($request->all());
+     $consumer->update($request->all());
 
      return response()->json($consumer);
   }
 
-  public function destroy($id)
+  public function destroy($cpf)
   {
-    $consumer = Consumer::find($id);
+    $consumer = Consumer::where('cpf', $cpf);
        if(!$consumer) {
            return response()->json([
                'message'   => 'Record not found',
