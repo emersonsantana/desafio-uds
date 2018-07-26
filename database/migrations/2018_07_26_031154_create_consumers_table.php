@@ -14,7 +14,9 @@ class CreateConsumersTable extends Migration
     public function up()
     {
         Schema::create('consumers', function (Blueprint $table) {
-          $table->uuid('id')->primary;
+        //  $table->uuid('id')->index()->unique;
+        //  $table->primary('id');
+          $table->uuid('id')->primary();
           $table->string('name', 255)->unique();
           $table->string('cpf', 11);
           $table->date('birth_date');
