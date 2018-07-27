@@ -11,6 +11,6 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'consumer_id' => Consumer::all()->random()->id,
         'number' => $faker->unique->randomNumber(3),
         'emission_date' => $faker->date(),
-        'total' => $faker->randomFloat(2, 1, 10000)
+        'total' => 0
     ];
 });

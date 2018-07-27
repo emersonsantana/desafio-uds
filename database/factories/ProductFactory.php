@@ -9,6 +9,6 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'id' => $faker->unique()->uuid,
         'code' => $faker->unique()->randomNumber(5),
         'name' => $faker->unique()->firstName(),
-        'price' => $faker->randomFloat(2, 0, 10000),
+        'price' => $faker->randomFloat(2, 0, 1000),
     ];
 });

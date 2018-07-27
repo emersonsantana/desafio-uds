@@ -15,10 +15,9 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
            $table->uuid('id')->primary();
-           $table->uuid('consumer_id')->index();
-              $table->foreign('consumer_id')->references('id')->on('consumer');
-
-            $table->increments('number');//auto incremento
+           $table->uuid('consumer_id');
+           $table->foreign('consumer_id')->references('id')->on('consumers');
+           $table->integer('number')->unique();   
            $table->date('emission_date');
            $table->double('total');
            $table->timestamps();
