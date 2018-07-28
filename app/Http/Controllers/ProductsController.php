@@ -4,62 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProduct;
+use App\Http\Requests\UpdateProduct;
 use App\Product;
+use App\Http\Repositories\ProductRepository;
 
 class ProductsController extends Controller
 {
+  private $productRepository;
+
+  public function __construct(ProductRepository $productRepository)
+  {
+      $this->productRepository = $productRepository;
+  }
+
    public function index()
    {
-     $products = Product::all();
-     return response()->json($products);
+     return $this->productRepository->allProducts();
    }
 
-   public function show($id)
+   public function show($code)
    {
-       $product = Product::find($id);
-       if(!$product){
-         return response()->json([
-             'message'   => 'Record not found',
-         ], 404);
-       }
-       return response()->json($product, 200);
+     return $this->productRepository->show($code);
    }
 
    public function store(StoreProduct $request)
    {
-       $product = new Product();
-
-        $product->name = $request->name;
-        $product->code = $request->code;
-        $product->price = $request->price;
-        $product->save();
-
-       return response()->json($product, 201);
+     return $this->productRepository->store($request);
    }
 
-   public function update(Request $request, $code)
+   public function update(UpdateProduct $request, $code)
    {
-     $product = Product::where('code',$code);
-
-      if(!$product) {
-          return response()->json([
-              'message'   => 'Record not found',
-          ], 404);
-      }
-      $product->update($request->all());
-
-      return response()->json($product);
+     return $this->productRepository->update($request, $code);
    }
 
    public function destroy($code)
    {
-      $product = Product::where('code',$code);
-        if(!$product) {
-            return response()->json([
-                'message'   => 'Record not found',
-            ], 404);
-        }
-        $product->delete();
-      return response()->json(202);
+      return $this->productRepository->delete($code);
    }
 }

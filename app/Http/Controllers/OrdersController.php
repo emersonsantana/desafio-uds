@@ -7,15 +7,23 @@ use App\Order;
 use App\OrderItem;
 use App\Consumer;
 use App\Product;
+use App\Http\Repositories\OrderRepository;
 use App\Http\Requests\StoreOrder;
 
 class OrdersController extends Controller
 {
+    private $orderRepository;
+
+    public function __construct(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     public function index()
     {
-      $orders = Order::all();
-      return response()->json($orders);
+      return $this->orderRepository->allOrders();
     }
+
     public function store(Request $request, $number = '')
     {
       $consumer = Consumer::where('cpf',$request->cpf)->get();
@@ -33,7 +41,7 @@ class OrdersController extends Controller
         $item->order_id = $order->id;
       }
       //Lógica:  novo pedido- posso ter uma função que resolva apenas peço um novo number
-      $order->number        = 1; //valor incremnetal
+      $order->number        = $this->orderRepository->NewNumberOrder();
       $order->emission_date = date('Y-m-d');//$request->emission_date;
       $order->consumer_id   = $consumer->first()->id;
       $order->total         = $total_item;
@@ -45,6 +53,7 @@ class OrdersController extends Controller
       $item->discount_percentage = $request->discount_percentage;
       $item->total = $total_item;
       $order->save();
+
 $item->order_id = $order->id;
       $item->save();
 
@@ -61,15 +70,7 @@ $item->order_id = $order->id;
 
     public function destroy($number)
     {
-      $order = Order::where('number', $number);
-
-      if(!$order){
-        return response()->json([
-            'message'   => 'Record not found',
-        ], 404);
-      }
-
-      $order->delete();
+      return $this->orderRepository->deleteOrder($number);
     }
 
 }
