@@ -32,12 +32,12 @@ O WebService trabalha com JSON para envio e retorno de dados.
 GET: /api/products
 ```
 - Inserir novo Produto
-É necessário enviar os seguintes atributos: code, name, price.
+É necessário enviar os seguintes atributos: **code, name, price**.
 ```
 POST: /api/products
 ```
 - Atualizar Produto Existente
-É necessário enviar os seguintes atributos: name, price.
+É necessário enviar os seguintes atributos: **name, price**.
 É necessário passar como parâmetro o código do produto: {code}.
 ```
 PUT: /api/products/{code}
@@ -55,12 +55,12 @@ DELETE: /api/products/{code}
 GET: /api/consumers
 ```
 - Inserir nova Pessoa
-É necessário enviar os seguintes atributos: name, cpf, birth_date.
+É necessário enviar os seguintes atributos: **name, cpf, birth_date**.
 ```
 POST: /api/consumers
 ```
 - Atualizar Pessoa Existente
-É necessário enviar os seguintes atributos: name, birth_date.
+É necessário enviar os seguintes atributos: **name, birth_date**.
 É necessário passar como parâmetro o CPF da Pessoa: {cpf}.
 ```
 PUT: /api/consumers/{cpf}
@@ -70,8 +70,17 @@ PUT: /api/consumers/{cpf}
 ```
 DELETE: /api/consumers/{cpf}
 ```
+### Pedidos (Orders)
 
-
+- Listar todos os Pedidos
+```
+GET: /api/orders
+```
+- Inserir novo Pedido <br/>
+É necessário enviar os seguintes atributos: **cpf, product_code, qtd, discount_percentage**.
+```
+POST: /api/orders
+```
 ## Executando os Testes
 
 Para executar os Testes da API será necessário utilizar o PHPunit
