@@ -33,7 +33,7 @@ class ProductsController extends Controller
         $product->code = $request->code;
         $product->price = $request->price;
         $product->save();
-        
+
        return response()->json($product, 201);
    }
 
@@ -51,14 +51,15 @@ class ProductsController extends Controller
       return response()->json($product);
    }
 
-   public function destroy($id)
+   public function destroy($code)
    {
-     $product = Product::find($id);
+      $product = Product::where('code',$code);
         if(!$product) {
             return response()->json([
                 'message'   => 'Record not found',
             ], 404);
         }
         $product->delete();
+      return response()->json(202);
    }
 }
