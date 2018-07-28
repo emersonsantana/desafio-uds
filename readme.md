@@ -82,9 +82,9 @@ GET: /api/orders
 POST: /api/orders
 ```
 - Exemplo:
-```
+```json
 {
-	  "cpf" : "76878355222",
+    "cpf" : "76878355222",
     "product_code" : "71864",
     "qtd" : "4",
     "discount_percentage":"10"
