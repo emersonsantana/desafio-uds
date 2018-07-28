@@ -4,62 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreConsumer;
+use App\Http\Requests\UpdateConsumer;
 use App\Consumer;
+use App\Http\Repositories\ConsumerRepository;
 
 class ConsumersController extends Controller
 {
-  public function index()
+  private $consumerRepository;
+
+  public function __construct(ConsumerRepository $consumerRepository)
   {
-    $consumer = Consumer::all();
-    return response()->json($consumer);
+      $this->consumerRepository = $consumerRepository;
   }
 
-  public function show($id)
+  public function index()
   {
-      $consumer = Consumer::find($id);
-      if(!$consumer){
-        return response()->json([
-            'message'   => 'Record not found',
-        ], 404);
-      }
-      return response()->json($consumer, 200);
+    return $this->consumerRepository->allConsumers();
+  }
+
+  public function show($cpf)
+  {
+      return $this->consumerRepository->show($cpf);
   }
 
   public function store(StoreConsumer $request)
   {
-      $consumer = new Consumer();
-      $consumer->name       = $request->name;
-      $consumer->cpf        = $request->cpf;
-      $consumer->birth_date = $request->birth_date;
-
-      $consumer->save();
-
-      return response()->json($consumer, 201);
+      return $this->consumerRepository->store($request);
   }
 
-  public function update(Request $request, $cpf)
+  public function update(UpdateConsumer $request, $cpf)
   {
-    $consumer = Consumer::where('cpf', $cpf);
-
-     if(!$consumer) {
-         return response()->json([
-             'message'   => 'Record not found',
-         ], 404);
-     }
-     $consumer->update($request->all());
-
-     return response()->json($consumer);
+      return $this->consumerRepository->update($request, $cpf);
   }
 
   public function destroy($cpf)
   {
-    $consumer = Consumer::where('cpf', $cpf);
-       if(!$consumer) {
-           return response()->json([
-               'message'   => 'Record not found',
-           ], 404);
-       }
-       $consumer->delete();
-   return response()->json(202);
+      return $this->consumerRepository->delete($cpf);
   }
 }
