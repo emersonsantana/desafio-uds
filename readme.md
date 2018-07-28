@@ -1,55 +1,96 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# WebService API Rest
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Esta API Rest permite utilizar recursos para trabalhar com Produtos, Pessoas e Pedidos.
+É possível Inserir, Atualizar, Remover e Listar os Produtos, Pessoas e Pedidos.
 
-## Sobre API Rest
+## Começando
 
-A API Rest contempla
-- Consumers
-- Product
+Clone este repositório para utilizar a API.
+```
+git@github.com:emersonsantana/desafio-uds.git
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+### Automatização Inicial
+- Migrations
+Criação e modelagem do Banco de Dados
+```
+php artisan migration
+```
+- Seeders
+Popula o Banco com dados fictícios
+```
+php artisan db:seed
+```
+## Utilizando o Serviço Web na Prática
+A API Rest utiliza termos do HTTP em seu funcionamento, siga as assinatura para utilizar todas funcionalidades do WebService.
+O WebService trabalha com JSON para envio e retorno de dados.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Produto (Product)
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+- Listar todos os Produtos
+```
+GET: /api/products
+```
+- Inserir novo Produto
+É necessário enviar os seguintes atributos: code, name, price.
+```
+POST: /api/products
+```
+- Atualizar Produto Existente
+É necessário enviar os seguintes atributos: name, price.
+É necessário passar como parâmetro o código do produto: {code}.
+```
+PUT: /api/products/{code}
+```
+- Excluir novo Produto
+É necessário passar como parâmetro o código do produto: {code}.
+```
+DELETE: /api/products/{code}
+```
 
-## Learning Laravel
+### Pessoa (Consumer)
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+- Listar todas Pessoas
+```
+GET: /api/consumers
+```
+- Inserir nova Pessoa
+É necessário enviar os seguintes atributos: name, cpf, birth_date.
+```
+POST: /api/consumers
+```
+- Atualizar Pessoa Existente
+É necessário enviar os seguintes atributos: name, birth_date.
+É necessário passar como parâmetro o CPF da Pessoa: {cpf}.
+```
+PUT: /api/consumers/{cpf}
+```
+- Excluir novo Produto
+É necessário passar como parâmetro o CPF da Pessoa: {cpf}.
+```
+DELETE: /api/consumers/{cpf}
+```
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Executando os Testes
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+Para executar os Testes da API será necessário utilizar o PHPunit
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
+```
+vendor/bin/phpunit
+```
 
-## Contributing
+## Dicas Externas
+É recomendado utilizar o Postman, um software para simplificar o uso de APIs.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+* [Postman](https://www.getpostman.com/) - Postman Makes API Development Simple.
 
-## Security Vulnerabilities
+## Autor
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+* **Emerson Santana Cunha** - *Initial work* - [Perfil](https://github.com/emersonsantana/)
 
-## License
+## Conclusão
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+### Challenge Accepted
+
+Projeto desenvolvido para participar do Desafio UDS - Backend
