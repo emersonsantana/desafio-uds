@@ -17,9 +17,8 @@ class OrdersController extends Controller
       return response()->json($orders);
     }
     public function store(Request $request, $number = '')
-    {//vem cpf, cod prod, quanti, desconto Caso tenho number adicionar ao pedido tal
+    {
       $consumer = Consumer::where('cpf',$request->cpf)->get();
-
       $product  = Product::where('code', $request->product_code)->first();
       $order    = new Order();
       $total_item = $product->price * $request->qtd;
@@ -33,14 +32,13 @@ class OrdersController extends Controller
         $total_item = $order->total + $total_item;
         $item->order_id = $order->id;
       }
+      //Lógica:  novo pedido- posso ter uma função que resolva apenas peço um novo number
       $order->number        = 1; //valor incremnetal
       $order->emission_date = date('Y-m-d');//$request->emission_date;
       $order->consumer_id   = $consumer->first()->id;
       $order->total         = $total_item;
       //Item do pedido
       $item = new OrderItem();
-
-
       $item->product_id = $product->id;
       $item->qtd = $request->qtd;
       $item->unit_price = $product->price;

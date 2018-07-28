@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
            $table->uuid('id')->primary();
            $table->uuid('consumer_id');
            $table->foreign('consumer_id')->references('id')->on('consumers');
-           $table->integer('number')->unique();   
+           $table->integer('number')->default(1)->unique();
            $table->date('emission_date');
            $table->double('total');
            $table->timestamps();

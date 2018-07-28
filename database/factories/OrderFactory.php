@@ -6,10 +6,12 @@ use \App\Consumer;
 
 $factory->define(App\Order::class, function (Faker\Generator $faker) {
 
+  static $number = 1;
+
     return [
         'id' => $faker->unique()->uuid,
         'consumer_id' => Consumer::all()->random()->id,
-        'number' => $faker->unique->randomNumber(3),
+        'number' => $number++,
         'emission_date' => $faker->date(),
         'total' => 0
     ];
