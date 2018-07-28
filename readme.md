@@ -1,6 +1,6 @@
 # WebService API Rest
 
-Esta API Rest permite utilizar recursos para trabalhar com Produtos, Pessoas e Pedidos.
+Esta API Rest permite utilizar recursos para trabalhar com Produtos, Pessoas e Pedidos. <br/>
 É possível Inserir, Atualizar, Remover e Listar os Produtos, Pessoas e Pedidos.
 
 ## Começando
@@ -22,7 +22,7 @@ Popula o Banco com dados fictícios
 php artisan db:seed
 ```
 ## Utilizando o Serviço Web na Prática
-A API Rest utiliza termos do HTTP em seu funcionamento, siga as assinatura para utilizar todas funcionalidades do WebService.
+A API Rest utiliza termos do HTTP em seu funcionamento, siga as assinatura para utilizar todas funcionalidades do WebService. <br/>
 O WebService trabalha com JSON para envio e retorno de dados.
 
 ### Produto (Product)
@@ -37,12 +37,12 @@ GET: /api/products
 POST: /api/products
 ```
 - Atualizar Produto Existente
-É necessário enviar os seguintes atributos: **name, price**.
+É necessário enviar os seguintes atributos: **name, price**. <br/>
 É necessário passar como parâmetro o código do produto: {code}.
 ```
 PUT: /api/products/{code}
 ```
-- Excluir novo Produto
+- Excluir novo Produto <br/>
 É necessário passar como parâmetro o código do produto: {code}.
 ```
 DELETE: /api/products/{code}
@@ -54,18 +54,18 @@ DELETE: /api/products/{code}
 ```
 GET: /api/consumers
 ```
-- Inserir nova Pessoa
+- Inserir nova Pessoa <br/>
 É necessário enviar os seguintes atributos: **name, cpf, birth_date**.
 ```
 POST: /api/consumers
 ```
 - Atualizar Pessoa Existente
-É necessário enviar os seguintes atributos: **name, birth_date**.
+É necessário enviar os seguintes atributos: **name, birth_date**. <br/>
 É necessário passar como parâmetro o CPF da Pessoa: {cpf}.
 ```
 PUT: /api/consumers/{cpf}
 ```
-- Excluir novo Produto
+- Excluir novo Produto <br/>
 É necessário passar como parâmetro o CPF da Pessoa: {cpf}.
 ```
 DELETE: /api/consumers/{cpf}
@@ -80,6 +80,15 @@ GET: /api/orders
 É necessário enviar os seguintes atributos: **cpf, product_code, qtd, discount_percentage**.
 ```
 POST: /api/orders
+```
+- Exemplo:
+```
+{
+	  "cpf" : "76878355222",
+    "product_code" : "71864",
+    "qtd" : "4",
+    "discount_percentage":"10"
+}
 ```
 ## Executando os Testes
 
