@@ -60,5 +60,6 @@ class ConsumersController extends Controller
            ], 404);
        }
        $consumer->delete();
+   return response()->json(202);
   }
 }
