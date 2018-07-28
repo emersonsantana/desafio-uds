@@ -38,12 +38,12 @@ POST: /api/products
 ```
 - Atualizar Produto Existente
 É necessário enviar os seguintes atributos: **name, price**. <br/>
-É necessário passar como parâmetro o código do produto: {code}.
+É necessário passar como parâmetro o código do produto: **{code}**.
 ```
 PUT: /api/products/{code}
 ```
 - Excluir novo Produto <br/>
-É necessário passar como parâmetro o código do produto: {code}.
+É necessário passar como parâmetro o código do produto: **{code}**.
 ```
 DELETE: /api/products/{code}
 ```
@@ -61,12 +61,12 @@ POST: /api/consumers
 ```
 - Atualizar Pessoa Existente
 É necessário enviar os seguintes atributos: **name, birth_date**. <br/>
-É necessário passar como parâmetro o CPF da Pessoa: {cpf}.
+É necessário passar como parâmetro o CPF da Pessoa: **{cpf}**.
 ```
 PUT: /api/consumers/{cpf}
 ```
-- Excluir novo Produto <br/>
-É necessário passar como parâmetro o CPF da Pessoa: {cpf}.
+- Excluir Produto <br/>
+É necessário passar como parâmetro o CPF da Pessoa: **{cpf}**.
 ```
 DELETE: /api/consumers/{cpf}
 ```
@@ -90,6 +90,19 @@ POST: /api/orders
     "discount_percentage":"10"
 }
 ```
+
+- Excluir um Pedido <br/>
+É necessário passar como parâmetro o Número do Pedido: **{number}**.
+```
+DELETE: /api/orders/{number}
+```
+- Exemplo: <br/>
+Excluir o Pedido de número 10
+```
+DELETE: /api/orders/10
+```
+
+
 ## Executando os Testes
 
 Para executar os Testes da API será necessário utilizar o PHPunit
