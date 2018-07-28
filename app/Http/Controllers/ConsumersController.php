@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreConsumer;
 use App\Consumer;
 
 class ConsumersController extends Controller
@@ -24,10 +25,13 @@ class ConsumersController extends Controller
       return response()->json($consumer, 200);
   }
 
-  public function store(Request $request)
+  public function store(StoreConsumer $request)
   {
       $consumer = new Consumer();
-      $consumer->fill($request->all());
+      $consumer->name       = $request->name;
+      $consumer->cpf        = $request->cpf;
+      $consumer->birth_date = $request->birth_date;
+
       $consumer->save();
 
       return response()->json($consumer, 201);

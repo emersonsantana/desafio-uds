@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProduct;
 use App\Product;
 
 class ProductsController extends Controller
@@ -24,12 +25,15 @@ class ProductsController extends Controller
        return response()->json($product, 200);
    }
 
-   public function store(Request $request)
+   public function store(StoreProduct $request)
    {
        $product = new Product();
-       $product->fill($request->all());
-       $product->save();
 
+        $product->name = $request->name;
+        $product->code = $request->code;
+        $product->price = $request->price;
+        $product->save();
+        
        return response()->json($product, 201);
    }
 
