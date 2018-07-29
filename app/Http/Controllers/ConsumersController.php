@@ -7,6 +7,7 @@ use App\Http\Requests\StoreConsumer;
 use App\Http\Requests\UpdateConsumer;
 use App\Consumer;
 use App\Http\Repositories\ConsumerRepository;
+use App\Search\ConsumerSearch;
 
 class ConsumersController extends Controller
 {
@@ -40,5 +41,9 @@ class ConsumersController extends Controller
   public function destroy($cpf)
   {
       return $this->consumerRepository->delete($cpf);
+  }
+  public function search(Request $request)
+  {
+     return ConsumerSearch::apply($request);
   }
 }

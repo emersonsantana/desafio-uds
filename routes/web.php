@@ -12,6 +12,7 @@ Route::group(array('prefix' => 'api'), function()
       Route::resource('orders', 'OrdersController');
 
       Route::post('/products/search', 'ProductsController@search');
+      Route::post('/consumers/search', 'ConsumersController@search');
   });
 
 Route::get('/', function () {
