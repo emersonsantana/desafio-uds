@@ -40,11 +40,9 @@ GET: /api/
     "status": "Connected"
 }
 ```
-
 ### Formato Padrão
-> Data no formato AAAA/MM/DD;
-<br/>
-> Números com “.” como separadores decimais, sem separadores milhares e com o sinal “-” representando valores negativo.
+:date: Data no formato AAAA/MM/DD;  <br/>
+:dollar:Números com “.” como separadores decimais, sem separadores milhares.
 
 ### Retornos
 Os dados e mensagens são retornados em formato JSON codificados com UTF-8.Um status code é retornado sempre.
