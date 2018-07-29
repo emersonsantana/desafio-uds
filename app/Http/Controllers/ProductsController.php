@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProduct;
 use App\Http\Requests\UpdateProduct;
 use App\Product;
 use App\Http\Repositories\ProductRepository;
+use App\Search\ProductSearch;
 
 class ProductsController extends Controller
 {
@@ -40,5 +41,9 @@ class ProductsController extends Controller
    public function destroy($code)
    {
       return $this->productRepository->delete($code);
+   }
+   public function search(Request $request)
+   {
+      return ProductSearch::apply($request);
    }
 }

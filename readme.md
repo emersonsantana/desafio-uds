@@ -47,6 +47,21 @@ PUT: /api/products/{code}
 ```
 DELETE: /api/products/{code}
 ```
+- Pesquisar <br/>
+É possível realizar pesquisa de produto passando os seguintes atributos: **{name, price, code}**. <br/>
+
+```
+POST: /api/products/search
+```
+- Exemplo: Buscar um Produto que contenha no nome 'Exe', preço de 10.90 e com o código 71864 <br/>
+Pode buscar passando apenas um atributo de seu interesse.
+```json
+{
+    "name" : "Exe",
+    "price" : "10.90",
+    "code" : "71864"
+}
+```
 
 ### Pessoa (Consumer)
 
