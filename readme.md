@@ -11,6 +11,10 @@ git@github.com:emersonsantana/desafio-uds.git
 ```
 
 ### Automatização Inicial
+- Iniciando Serviço<br/>
+```
+php artisan serve
+```
 - Migrations <br/>
 Criação e modelagem do Banco de Dados
 ```
@@ -25,12 +29,17 @@ php artisan db:seed
 A API Rest utiliza termos do HTTP em seu funcionamento, siga as assinatura para utilizar todas funcionalidades do WebService. <br/>
 O WebService trabalha com JSON para envio e retorno de dados. <br/>
 
-## Teste a conexão
+### Teste a conexão
 Para verificar se a conexão com a API está OK teste seguindo a Rota de Base:
 ```
  /api/
 ```
-Deverá retornar Status 'Connected' <br/>
+### Formato Padrão
+> Data no formato AAAA/MM/DD;
+> Números com “.” como separadores decimais, sem separadores milhares e com o sinal “-” representando valores negativo.
+
+### Retornos
+Os dados e mensagens são retornados em formato JSON codificados com UTF-8.Um status code é retornado sempre. É importante uma correta validação deste status considerando que um valor maior ou igual a 300 sempre representa um erro. O status 200 significa processamento realizado com sucesso sem ressalvas.
 
 ### Produto (Product)
 
@@ -43,7 +52,7 @@ GET: /api/products
 ```
 POST: /api/products
 ```
-- Exemplo:
+** Exemplo: **
 ```json
 {
     "code" : "1023",
@@ -69,12 +78,12 @@ DELETE: /api/products/{code}
 ```
 POST: /api/products/search
 ```
-- Exemplo: Buscar um Produto que contenha no nome 'Exe', preço de 10.90 e com o código 71864 <br/>
-Pode buscar passando apenas um atributo de seu interesse.
+** Exemplo: ** Buscar um Produto que contenha no nome 'Tesla 2018', preço em 40000 e com o código 71864 <br/>
+Pode buscar passando um ou mais atributo de seu interesse.
 ```json
 {
-    "name" : "Exe",
-    "price" : "10.90",
+    "name" : "Tesla 2018",
+    "price" : "40000",
     "code" : "71864"
 }
 ```
@@ -107,7 +116,7 @@ DELETE: /api/consumers/{cpf}
 ```
 POST: /api/products/search
 ```
-- Exemplo: Buscar uma Pessoa que tenha o nome de 'Ana'<br/>
+** Exemplo:** Buscar uma Pessoa que tenha o nome de 'Ana'<br/>
 Pode buscar passando um ou mais atributo de seu interesse.
 ```json
 {
