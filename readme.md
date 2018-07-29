@@ -32,14 +32,26 @@ O WebService trabalha com JSON para envio e retorno de dados. <br/>
 ### Teste a conexão
 Para verificar se a conexão com a API está OK teste seguindo a Rota de Base:
 ```
- /api/
+GET: /api/
 ```
+```json
+{
+    "message": "API",
+    "status": "Connected"
+}
+```
+
 ### Formato Padrão
 > Data no formato AAAA/MM/DD;
+<br/>
 > Números com “.” como separadores decimais, sem separadores milhares e com o sinal “-” representando valores negativo.
 
 ### Retornos
-Os dados e mensagens são retornados em formato JSON codificados com UTF-8.Um status code é retornado sempre. É importante uma correta validação deste status considerando que um valor maior ou igual a 300 sempre representa um erro. O status 200 significa processamento realizado com sucesso sem ressalvas.
+Os dados e mensagens são retornados em formato JSON codificados com UTF-8.Um status code é retornado sempre.
+<br/>
+É importante uma correta validação deste status considerando que um valor maior ou igual a 300 sempre representa um erro.
+<br/>
+O status 200 significa processamento realizado com sucesso sem ressalvas.
 
 ### Produto (Product)
 
