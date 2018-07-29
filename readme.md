@@ -23,7 +23,14 @@ php artisan db:seed
 ```
 ## Utilizando o Serviço Web na Prática
 A API Rest utiliza termos do HTTP em seu funcionamento, siga as assinatura para utilizar todas funcionalidades do WebService. <br/>
-O WebService trabalha com JSON para envio e retorno de dados.
+O WebService trabalha com JSON para envio e retorno de dados. <br/>
+
+## Teste a conexão
+Para verificar se a conexão com a API está OK teste seguindo a Rota de Base:
+```
+ /api/
+```
+Deverá retornar Status 'Connected' <br/>
 
 ### Produto (Product)
 
@@ -36,6 +43,15 @@ GET: /api/products
 ```
 POST: /api/products
 ```
+- Exemplo:
+```json
+{
+    "code" : "1023",
+    "name" : "MacBook Pro",
+    "price" : "4000"
+}
+```
+
 - Atualizar  <br/>
 É necessário enviar os seguintes atributos: **name, price**. <br/>
 É necessário passar como parâmetro o código do produto: **{code}**.
@@ -130,7 +146,21 @@ Excluir o Pedido de número 10
 ```
 DELETE: /api/orders/10
 ```
+- Pesquisar <br/>
+É possível realizar pesquisa de pedido passando os seguintes atributos: **{number, emission_date, total}**. <br/>
 
+```
+POST: /api/orders/search
+```
+- Exemplo:<br/>
+Pode buscar passando apenas um atributo de seu interesse.
+```json
+{
+    "number" : "10",
+    "emission_date" : "2018-07-24",
+    "total" : "150"
+}
+```
 
 ## Executando os Testes
 

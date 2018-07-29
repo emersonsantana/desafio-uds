@@ -9,6 +9,7 @@ use App\Consumer;
 use App\Product;
 use App\Http\Repositories\OrderRepository;
 use App\Http\Requests\StoreOrder;
+use App\Search\OrderSearch;
 
 class OrdersController extends Controller
 {
@@ -53,24 +54,20 @@ class OrdersController extends Controller
       $item->discount_percentage = $request->discount_percentage;
       $item->total = $total_item;
       $order->save();
-
-$item->order_id = $order->id;
+      $item->order_id = $order->id;
       $item->save();
 
       return response()->json($item);
-    }
-    public function show($id)
-    {
-
-    }
-    public function update($id)
-    {
-
     }
 
     public function destroy($number)
     {
       return $this->orderRepository->deleteOrder($number);
+    }
+
+    public function search(Request $request)
+    {
+       return OrderSearch::apply($request);
     }
 
 }
