@@ -82,4 +82,11 @@ class ProductRepository
 
 			return response()->json($product, $code_http);
 	}
+
+		public function findByCode($code)
+		{
+			$data = $this->model->where('code',$code)->get()->first();
+			return $data;
+		}
+
 }

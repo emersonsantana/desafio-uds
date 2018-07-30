@@ -61,4 +61,10 @@ class OrderRepository
 			$exist = $this->model->where('id',$pessoa->id);
 			return $exist->number;
 	}
+
+	public function findByNumber($number)
+	{
+		$data = $this->model->where('number',$number)->get()->first();
+		return $data;
+	}
 }

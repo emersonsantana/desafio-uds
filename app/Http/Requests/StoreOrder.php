@@ -24,8 +24,10 @@ class StoreOrder extends FormRequest
     public function rules()
     {
         return [
-          
           'cpf' => 'required|cpf|exists:consumers,cpf|max:11',
+          'product_code' => 'required|string|exists:products,code',
+          'qtd' => 'required|numeric',
+          'discount_percentage' => 'required|numeric|min:0'
         ];
     }
 }

@@ -50,4 +50,10 @@ private $cpf    = '40013494007';
          $responseOrder->assertStatus(200);
      }
 
+     public function testGetConsumers()
+     {
+         $response = $this->get('/api/orders');
+         $response->assertStatus(200);
+     }
+
 }

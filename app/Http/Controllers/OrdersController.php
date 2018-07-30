@@ -8,16 +8,24 @@ use App\OrderItem;
 use App\Consumer;
 use App\Product;
 use App\Http\Repositories\OrderRepository;
+use App\Http\Repositories\ProductRepository;
+use App\Http\Repositories\ConsumerRepository;
 use App\Http\Requests\StoreOrder;
 use App\Search\OrderSearch;
 
 class OrdersController extends Controller
 {
     private $orderRepository;
+    private $productRepository;
+    private $consumerRepository;
 
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrderRepository $orderRepository,
+                                ProductRepository $productRepository,
+                                ConsumerRepository $consumerRepository)
     {
         $this->orderRepository = $orderRepository;
+        $this->productRepository = $productRepository;
+        $this->consumerRepository = $consumerRepository;
     }
 
     public function index()
@@ -25,30 +33,28 @@ class OrdersController extends Controller
       return $this->orderRepository->allOrders();
     }
 
-    public function store(Request $request, $number = '')
+    public function store(StoreOrder $request, $number = '')
     {
-      $consumer = Consumer::where('cpf',$request->cpf)->get()->first();
-      $product  = Product::where('code', $request->product_code)->get()->first();
+      $consumer = $this->consumerRepository->findByCPF($request->cpf);
+      $product  = $this->productRepository->findByCode($request->product_code);
 
       if(isset($consumer) && isset($product))
       {
         $order    = new Order();
         $total_item = $product->price * $request->qtd;
-        //com desconto
         $discount = ( $total_item/100 ) * $request->discount_percentage;
         $total_item = round( $total_item - $discount, 2 );
-        if($number)
-        {
-          $order = Order::where('number', $number)->get()->first();
-          //Atualiza o $total e salva o item do Pedido
-          if(!isset($order)) //caso seja passado um number que não exista
-              return response()->json(['message'   => 'Record not found',], 404);
-          $total_item = $order->total + $total_item;
-        }
+          if($number){
+            $order =  $this->orderRepository->findByNumber($number);
+              if(!isset($order)){
+                return response()->json(['message'   => 'Record not found',], 404);
+              }
+            $total_item = $order->total + $total_item;
+          }
         //Função NewNumberOrder trata o number correto
         $order->number        = $this->orderRepository->NewNumberOrder();
         $order->emission_date = date('Y-m-d');//$request->emission_date;
-        $order->consumer_id   = $consumer->first()->id;
+        $order->consumer_id   = $consumer->id;
         $order->total         = $total_item;
         //Item do pedido
         $item = new OrderItem();

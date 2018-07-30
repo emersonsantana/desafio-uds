@@ -78,6 +78,12 @@ class ConsumerRepository
 			 $consumer->save();
 
 			return response()->json($consumer, 201);
-
 	}
+
+	public function findByCPF($cpf)
+	{
+		$data = $this->model->where('cpf',$cpf)->get()->first();
+		return $data;
+	}
+
 }
