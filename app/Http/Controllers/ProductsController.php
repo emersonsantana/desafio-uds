@@ -30,6 +30,7 @@ class ProductsController extends Controller
 
    public function store(StoreProduct $request)
    {
+
      return $this->productRepository->store($request);
    }
 

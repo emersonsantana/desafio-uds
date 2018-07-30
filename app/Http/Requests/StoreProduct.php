@@ -29,4 +29,12 @@ class StoreProduct extends FormRequest
           'price'=> 'required|numeric|min:1'
         ];
     }
+
+  public function messages()
+   {
+       return [
+           'price.min' => 'Minimum value is 1',
+           // ..
+       ];
+   }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Repositories;
 
 use App\Order;
+use App\Http\Repositories\ConsumerRepository;
 
 class OrderRepository
 {
@@ -23,7 +24,7 @@ class OrderRepository
 		$data = $this->model->all();
 		return response()->json($data);
 	}
-	
+
 	public function deleteOrder($number = '')
 	{
 		$order = $this->model->where('number', $number);
@@ -51,5 +52,13 @@ class OrderRepository
 		}
 		return $number;
 	}
-
+	//Função para buscar o number para o TEST de excluir um Pedido
+	public function NumberByCPF($cpf)
+	{
+		//primeiro busca a pessoa e o seu id do id busca
+			$pessoaRep = new ConsumerRepository();
+			$pessoa = $pessoaRep->where('cpf', $cpf);
+			$exist = $this->model->where('id',$pessoa->id);
+			return $exist->number;
+	}
 }

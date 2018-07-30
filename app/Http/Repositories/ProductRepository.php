@@ -70,13 +70,16 @@ class ProductRepository
 
 	public function store(StoreProduct $request)
 	{
+		$code_http = 400;
 			 $product = new Product();
 
 			 $product->name = $request->name;
 			 $product->code = $request->code;
 			 $product->price = $request->price;
-			 $product->save();
 
-			return response()->json($product, 201);
+			 if($product->save())
+			 		$code_http = 201;
+
+			return response()->json($product, $code_http);
 	}
 }

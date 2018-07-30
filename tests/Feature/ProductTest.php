@@ -19,11 +19,7 @@ class ProductTest extends TestCase
 /*
 *  Afirme que a resposta tem um determinado código:
 */
-    public function testGetProducts()
-    {
-        $response = $this->get('/api/products');
-        $response->assertStatus(200);
-    }
+
 
     public function testStoreProduct()
     {
@@ -33,15 +29,34 @@ class ProductTest extends TestCase
         "name" => "Product Test",
         "price" => "29.90"
       ]
-    );
+      );
       $response->assertStatus(201);
     }
+    
+    public function testGetProducts()
+    {
+        $response = $this->get('/api/products');
+        $response->assertStatus(200);
+    }
+
+    public function testGetProductCode()
+    {
+      $response = $this->json('Get', 'api/products/'.$this->code);
+      $response->assertStatus(200);
+    }
+
 
     public function testRemoveProduct()
     {
       $response = $this->json('Delete', 'api/products/'.$this->code);
       $response->assertStatus(202);
     }
+    public function testRemoveProductFail()
+    {
+      $response = $this->json('Delete', 'api/products/');
+      $response->assertStatus(405);
+    }
+
 /*
  *  Afirme que uma tabela no banco de dados não contém os dados fornecidos.
  *  É passado um Valor inválido pois é negativo. A aplicação não pode inserir tal registro.
