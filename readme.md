@@ -11,6 +11,7 @@ git@github.com:emersonsantana/desafio-uds.git
 ```
 
 ### Automatização Inicial
+Composer é utiliza para gerenciar as dependências. <br/>
 - Iniciando Serviço<br/>
 ```
 php artisan serve
