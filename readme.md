@@ -1,7 +1,7 @@
-# WebService API Rest
+# Visão Geral - API Desafio UDS  
+O objetivo desta documentação é orientar sobre como utilizar a _API Desafio UDS_, descrevendo as funcionalidades, os métodos a serem utilizados, listando informações a serem enviadas e recebidas, e provendo exemplos.
 
-Esta API Rest permite utilizar recursos para trabalhar com Produtos, Pessoas e Pedidos. <br/>
-É possível Inserir, Atualizar, Remover e Listar os Produtos, Pessoas e Pedidos.
+Esta API Rest permite Criar, Listar, Atualizar e Remover os itens das seguintes entidades **Produtos, Pessoas e Pedidos.** <br/>
 
 ## Começando
 
@@ -67,7 +67,7 @@ GET: /api/products
 ```
 POST: /api/products
 ```
-** Exemplo: **
+**Exemplo:**
 ```json
 {
     "code" : "1023",
@@ -93,7 +93,7 @@ DELETE: /api/products/{code}
 ```
 POST: /api/products/search
 ```
-** Exemplo: ** Buscar um Produto que contenha no nome 'Tesla 2018', preço em 40000 e com o código 71864 <br/>
+**Exemplo:** Buscar um Produto que contenha no nome 'Tesla 2018', preço em 40000 e com o código 71864 <br/>
 Pode buscar passando um ou mais atributo de seu interesse.
 ```json
 {
@@ -114,6 +114,14 @@ GET: /api/consumers
 ```
 POST: /api/consumers
 ```
+**Exemplo:**
+```json
+{
+    "name" : "Natália Santana Viana",
+    "cpf" : "97819512067",
+    "birth_date" : "1990/12/22"
+}
+```
 - Atualizar
 É necessário enviar os seguintes atributos: **name, birth_date**. <br/>
 É necessário passar como parâmetro o CPF da Pessoa: **{cpf}**.
@@ -131,7 +139,7 @@ DELETE: /api/consumers/{cpf}
 ```
 POST: /api/products/search
 ```
-** Exemplo:** Buscar uma Pessoa que tenha o nome de 'Ana'<br/>
+**Exemplo:** Buscar uma Pessoa que tenha o nome de 'Ana'<br/>
 Pode buscar passando um ou mais atributo de seu interesse.
 ```json
 {
@@ -150,7 +158,7 @@ GET: /api/orders
 ```
 POST: /api/orders
 ```
-** Exemplo: ** <br/>
+**Exemplo:** <br/>
 ```json
 {
     "cpf" : "76878355222",
@@ -165,7 +173,7 @@ POST: /api/orders
 ```
 DELETE: /api/orders/{number}
 ```
-** Exemplo: ** <br/>
+**Exemplo:** <br/>
 Excluir o Pedido de número 10
 ```
 DELETE: /api/orders/10
@@ -176,7 +184,7 @@ DELETE: /api/orders/10
 ```
 POST: /api/orders/search
 ```
-** Exemplo: ** <br/>
+**Exemplo:** <br/>
 Pode buscar passando apenas um atributo de seu interesse.
 ```json
 {
@@ -191,7 +199,7 @@ Pode buscar passando apenas um atributo de seu interesse.
 ```
 POST: /api/orders/{number}
 ```
-** Exemplo: ** <br/>
+**Exemplo:** <br/>
 ```json
 {
     "cpf" : "76878355222",
