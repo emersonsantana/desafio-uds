@@ -14,6 +14,7 @@ Route::group(array('prefix' => 'api'), function()
       Route::post('/products/search', 'ProductsController@search');
       Route::post('/consumers/search', 'ConsumersController@search');
       Route::post('/orders/search', 'OrdersController@search');
+      Route::post('/orders/{number}', 'OrdersController@store');
   });
 
 Route::get('/', function () {

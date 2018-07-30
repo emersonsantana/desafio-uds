@@ -42,8 +42,13 @@ GET: /api/
 ```
 ### Formato Padrão
 :date: Data no formato AAAA/MM/DD;  <br/>
-:dollar:Números com “.” como separadores decimais, sem separadores milhares.
-
+```
+Exemplo: 2018/07/29
+```
+:dollar: Números com “.” como separadores decimais, sem separadores milhares.
+```
+Exemplo: 1000.90
+```
 ### Retornos
 Os dados e mensagens são retornados em formato JSON codificados com UTF-8.Um status code é retornado sempre.
 <br/>
@@ -145,7 +150,7 @@ GET: /api/orders
 ```
 POST: /api/orders
 ```
-- Exemplo:
+** Exemplo: ** <br/>
 ```json
 {
     "cpf" : "76878355222",
@@ -160,7 +165,7 @@ POST: /api/orders
 ```
 DELETE: /api/orders/{number}
 ```
-- Exemplo: <br/>
+** Exemplo: ** <br/>
 Excluir o Pedido de número 10
 ```
 DELETE: /api/orders/10
@@ -171,13 +176,28 @@ DELETE: /api/orders/10
 ```
 POST: /api/orders/search
 ```
-- Exemplo:<br/>
+** Exemplo: ** <br/>
 Pode buscar passando apenas um atributo de seu interesse.
 ```json
 {
     "number" : "10",
     "emission_date" : "2018-07-24",
     "total" : "150"
+}
+```
+- Incluir Item de Pedido a um Pedido existente <br/>
+É possível inserir um Item no pedido passando os seguintes atributos: **cpf, product_code, qtd, discount_percentage**. <br/>
+É necessário passar como parâmetro o Número do Pedido: **{number}**.
+```
+POST: /api/orders/{number}
+```
+** Exemplo: ** <br/>
+```json
+{
+    "cpf" : "76878355222",
+    "product_code" : "71864",
+    "qtd" : "4",
+    "discount_percentage":"10"
 }
 ```
 
